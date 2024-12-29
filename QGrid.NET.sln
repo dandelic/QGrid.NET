@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35431.28
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QGrid.NET", "QGrid.NET\QGrid.NET.csproj", "{BBEBB386-9B6A-41ED-8996-D9C839483462}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{26080300-81F2-4792-A55A-4EE87E0F6134}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AA601D57-3EA5-4B88-8F1A-4481462B6263}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QGrid.Tests", "QGrid.Tests\QGrid.Tests.csproj", "{5BAAD21E-6CEF-499F-97A6-436AAA661E15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBEBB386-9B6A-41ED-8996-D9C839483462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBEBB386-9B6A-41ED-8996-D9C839483462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBEBB386-9B6A-41ED-8996-D9C839483462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBEBB386-9B6A-41ED-8996-D9C839483462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BAAD21E-6CEF-499F-97A6-436AAA661E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BAAD21E-6CEF-499F-97A6-436AAA661E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BAAD21E-6CEF-499F-97A6-436AAA661E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BAAD21E-6CEF-499F-97A6-436AAA661E15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BBEBB386-9B6A-41ED-8996-D9C839483462} = {26080300-81F2-4792-A55A-4EE87E0F6134}
+		{5BAAD21E-6CEF-499F-97A6-436AAA661E15} = {AA601D57-3EA5-4B88-8F1A-4481462B6263}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {60B4073A-418A-4942-B6D5-868A825BEFAD}
+	EndGlobalSection
+EndGlobal
