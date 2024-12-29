@@ -1,7 +1,7 @@
 ### What's QGrid?
 
-**QGrid.NET** is a .NET library designed to simplify server-side operations for filtering, sorting and pagination of `IQueryable` data sources. 
-By using `LINQ` and reflection it dynamically constructs and executes queries, making it easier to handle data operations for APIs and services.
+**QGrid.NET** is a library designed to simplify server-side operations for filtering, sorting and pagination of `IQueryable` data sources. 
+By using `LINQ` expressions and reflection it dynamically constructs and executes queries, making it easier to handle data operations for APIs and services.
 
 It allows users to filter and sort by multiple properties, including nested properties. Conditions are combined using `AND` or `OR` operators.
 Also, the library provides pagination and search functionality, allowing you to search across multiple properties simultaneously.
@@ -31,9 +31,52 @@ public class Employee
 }
 
 ```
-To retrieve a filtered and paginated list of employees, we need to send a `QueryModel` object to the API endpoint, which includes the necessary filters, sorting, and pagination details.
+To retrieve a filtered and paginated list of employees, we need to send a `QueryModel` object to the API endpoint.
 
-Then we use `Evaluate` method that will perform data operations on query and give us mapped results alongside pagination information inside `QPagedResponse` class.
+Here's the example in JSON format:
+
+```json
+{
+  "filters": [
+    {
+      "property": "Salary",
+      "value": "2500",
+      "operand": "gt",
+      "operator": "and"
+    },
+    {
+      "property": "Company.Name",
+      "value": "Global Company",
+      "operand": "eq",
+      "operator": "and"
+    }
+  ],
+  "search" : {
+    "term": "Jo",
+    "operand": "sw",
+    "properties": ["FirstName"]
+  },
+  "sort": [
+    {
+      "property": "FirstName",
+      "ascending": true
+    }
+  ],
+  "pagination": {
+    "rows": 5,
+    "page": 1
+  }
+}
+
+
+```
+By sending this filter we apply:
+- `Salary > 2500` (employees earning more than 2500).
+- `Company.Name == "Global Company"` (employees working for "Global Company").
+- `FirstName` starts with "Jo".
+- Sort by `FirstName` in ascending order.
+- First page with maximum of 10 records per page.
+
 
 ```csharp
 [ApiController]
@@ -59,45 +102,48 @@ public class EmployeeController(AppDbContext context) : ControllerBase
 }
 ```
 
+Upon receiving the `QueryModel` object in the `Controller`, we use the `Evaluate` method to apply data operations on the query. 
 
+The result is a mapped data response, complete with pagination details, wrapped in a `QPagedResponse` object.
 
-If the JSON payload sent to the endpoint looked this we would get:
-- `Salary > 2500` (employees earning more than 2500).
-- `Company.Name == "Example Company"` (employees working for "Example Company").
-- `FirstName` and `LastName` starts with "Jo".
-- Sorted by `FirstName` in ascending order.
-- First page with 10 rows.
+Example of the `QPagedResponse` response in JSON format:
 
 ```json
 {
-  "filters": [
-    {
-      "property": "Salary",
-      "value": "2500",
-      "operand": "gt",
-      "operator": "and"
+    "pagination": {
+        "currentPage": 1,
+        "pageSize": 5,
+        "totalPages": 4,
+        "totalCount": 18
     },
-    {
-      "property": "Company.Name",
-      "value": "Example Company",
-      "operand": "eq",
-      "operator": "and"
-    }
-  ],
-  "search" : {
-    "term": "Jo",
-    "operator": "and",
-    "operand": "sw",
-    "properties": ["FirstName", "LastName"]
-  },
-  "sort": [
-    {
-      "property": "FirstName",
-      "ascending": true
-    }
-  ],
-  "pagination": {
-    "rows": 10,
-    "page": 1
-  }
+    "data": [
+        {
+            "name": "John Doe",
+            "salary": 3000,
+            "companyName": "Global Company"
+        },
+        {
+            "name": "Joanna Smith",
+            "salary": 3500,
+            "companyName": "Global Company"
+        },
+        {
+            "name": "Johnny Depp",
+            "salary": 4500,
+            "companyName": "Global Company"
+        },
+        {
+            "name": "Jordan Johnson",
+            "salary": 5000,
+            "companyName": "Global Company"
+        },
+        {
+            "name": "Jodie Turner",
+            "salary": 3200,
+            "companyName": "Global Company"
+        }
+    ]
 }
+```
+
+
