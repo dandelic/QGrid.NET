@@ -1,0 +1,26 @@
+{
+  "filters": [
+    {
+      "property": "Age",
+      "value": "30",
+      "operand": "gt",
+      "operator": "and"
+    },
+    {
+      "property": "Salary",
+      "value": "35000",
+      "operand": "gte",
+      "operator": "and"
+    }
+  ],
+  "sort": [
+    {
+      "property": "Name",
+      "ascending": true
+    }
+  ],
+  "pagination": {
+    "rows": 10,
+    "page": 1
+  }
+}
