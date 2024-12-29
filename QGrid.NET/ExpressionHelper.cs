@@ -8,6 +8,13 @@ namespace QGrid.NET
 {
     internal static class ExpressionHelper
     {
+        /// <summary>
+        /// Generates a MemberExpression for accessing a property or field from a given parameter expression.
+        /// </summary>
+        /// <param name="parameter">The parameter expression representing the object.</param>
+        /// <param name="propertyName">The name of the property or field to access, supports nested properties using dot notation.</param>
+        /// <returns>A MemberExpression representing the property access.</returns>
+        /// <exception cref="QArgumentException">Thrown if the property name is null, empty, or invalid for the parameter type.</exception>
         internal static MemberExpression PropertyExpression(ParameterExpression parameter, string propertyName)
         {
             QArgumentException.ThrowIfNullOrEmpty(propertyName);
@@ -24,6 +31,14 @@ namespace QGrid.NET
             return (MemberExpression)property;
         }
 
+        /// <summary>
+        /// Creates a filter expression based on a QueryFilter object.
+        /// </summary>
+        /// <typeparam name="T">The type of the entity being filtered.</typeparam>
+        /// <param name="parameter">The parameter expression representing the object.</param>
+        /// <param name="filter">The filter definition containing property name, value, and operand type.</param>
+        /// <returns>An Expression representing the filter logic.</returns>
+        /// <exception cref="QArgumentException">Thrown if the operand type is unsupported.</exception>
         internal static Expression FilterExpression<T>(ParameterExpression parameter, QueryFilter filter)
         {
             MemberExpression property = PropertyExpression(parameter, filter.PropertyName);
@@ -44,6 +59,14 @@ namespace QGrid.NET
             };
         }
 
+        /// <summary>
+        /// Combines two expressions using a logical operator (AND/OR).
+        /// </summary>
+        /// <param name="operatorType">The logical operator type (AND/OR).</param>
+        /// <param name="finalExpression">The existing expression.</param>
+        /// <param name="filterExpression">The new filter expression to combine.</param>
+        /// <returns>A combined Expression using the specified logical operator.</returns>
+        /// <exception cref="QArgumentException">Thrown if the logical operator type is unsupported.</exception>
         internal static Expression OperatorExpression(LogicalOperatorType operatorType, Expression finalExpression, Expression filterExpression)
             => operatorType switch
             {
@@ -52,7 +75,13 @@ namespace QGrid.NET
                 _ => throw new QArgumentException($"Unsupported logical operator '{operatorType}'."),
             };
 
-
+        /// <summary>
+        /// Creates a constant expression from a string value and a target type.
+        /// </summary>
+        /// <param name="type">The target type of the constant.</param>
+        /// <param name="value">The string representation of the value to parse.</param>
+        /// <returns>A ConstantExpression representing the parsed value.</returns>
+        /// <exception cref="QArgumentException">Thrown if the type is unsupported or the value cannot be parsed into the target type.</exception>
         internal static ConstantExpression ConstantExpression(Type type, string value)
         {
             QArgumentException.ThrowIfNull(value);
@@ -119,6 +148,5 @@ namespace QGrid.NET
 
             return Expression.Constant(parsedValue, type);
         }
-
     }
 }
