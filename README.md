@@ -4,7 +4,7 @@
 By using `LINQ` expressions and reflection it dynamically constructs and executes queries, making it easier to handle data operations for APIs and services.
 
 It allows users to filter and sort by multiple properties, including nested properties. Conditions are combined using `AND` or `OR` operators.
-Also, the library provides pagination and search functionality, allowing you to search across multiple properties simultaneously.
+Also, the library provides search functionality, allowing you to search across multiple properties simultaneously.
 
 
 ### How does it work?
@@ -77,6 +77,7 @@ By sending this filter we apply:
 - Sort by `FirstName` in ascending order.
 - First page with maximum of 10 records per page.
 
+In the `EmployeeController`, we accept a `QueryModel` from the request body and apply it to the `IQueryable<Employee>` query.
 
 ```csharp
 [ApiController]
@@ -101,9 +102,7 @@ public class EmployeeController(AppDbContext context) : ControllerBase
     }
 }
 ```
-
-Upon receiving the `QueryModel` object in the `Controller`, we use the `Evaluate` method to apply data operations on the query. 
-
+To apply data operations from the request, we use `Evaluate` method.
 The result is a mapped data response, complete with pagination details, wrapped in a `QPagedResponse` object.
 
 Example of the `QPagedResponse` response in JSON format:
