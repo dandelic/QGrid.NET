@@ -1,15 +1,20 @@
 ### What's QGrid?
 
-**QGrid.NET** is a library designed to simplify server-side operations for filtering, sorting and pagination of `IQueryable` data sources. 
-By using `LINQ` expressions and reflection it dynamically constructs and executes queries, making it easier to handle data operations for APIs and services.
+**QGrid.NET** is a library designed to streamline server-side operations such as filtering, sorting and pagination by dynamically generating `LINQ` expressions making data manipulation easier for grid-like data views in APIs and services.
 
-It allows users to filter and sort by multiple properties, including nested properties. Conditions are combined using `AND` or `OR` operators.
-Also, the library provides search functionality, allowing you to search across multiple properties simultaneously.
+The idea is to enable front-end applications to send a request object specifying the data manipulation tasks, which are then evaluated on the server and returned as a structured response.
 
+### Key Features
+
+- **Multi-Field Operations**: Supports filtering and sorting across multiple fields and nested properties
+- **Operands**: Comparison (`Equals`,`GreatherThan`..) and string operands (`StartsWith`, `Contains`..)
+- **Operators**: Combine conditions using `AND` or `OR` operators
+- **Search**: Search across multiple properties with operands (`StartsWith`, `Contains`..)
+- **Pagination**: Provides paginated response with option for data mapping
 
 ### How does it work?
 
-Let's say we have a simple database model with entities **Employee** and **Company**.
+Let's say we have a simple database model with **Employee** and **Company**.
 
 ```csharp
 public class Company
