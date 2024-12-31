@@ -364,3 +364,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /QGrid.Tests/QGrid.Tests.csproj
+/QGrid.Test/QGrid.Test.csproj
