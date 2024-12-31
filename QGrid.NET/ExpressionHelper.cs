@@ -87,6 +87,14 @@ namespace QGrid.NET
             QArgumentException.ThrowIfNull(value);
             object parsedValue;
 
+            if (type.IsEnum)
+            {
+                if (Enum.TryParse(type, value?.ToString(), true, out var result))              
+                    return Expression.Constant(result, type);            
+                else           
+                    throw QArgumentException.ThrowIfInvalidType(type, value!);              
+            }
+
             switch (Type.GetTypeCode(type))
             {
                 case TypeCode.Int32:
