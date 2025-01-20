@@ -1,8 +1,8 @@
 ### What's QGrid?
 
-**QGrid.NET** is a library designed to streamline server-side operations such as filtering, sorting and pagination by dynamically generating `LINQ` expressions making data manipulation easier for grid-like data views in APIs and services.
+**QGrid.NET** is a library designed to simplify server-side operations such as filtering, sorting and pagination by dynamically generating `LINQ` expressions making data manipulation easier for grid-like data views in APIs and services.
 
-The idea is to enable front-end applications to send a request object specifying the data manipulation tasks, which are then evaluated on the server and returned as a structured response.
+The idea is to enable client applications to send a request object specifying the data manipulation tasks, which are then evaluated on the server and returned as a structured response.
 
 ### Key Features
 
